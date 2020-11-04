@@ -39,6 +39,11 @@ class Conference
      */
     private $comments;
 
+    public function __toString(): string
+    {
+        return $this->city . ' ' . $this->year;
+    }
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -95,7 +100,8 @@ class Conference
 
     public function addComment(Comment $comment): self
     {
-        if (!$this->comments->contains($comment)) {
+        if (!$this->comments->contains($comment))
+        {
             $this->comments[] = $comment;
             $comment->setConference($this);
         }
@@ -105,9 +111,11 @@ class Conference
 
     public function removeComment(Comment $comment): self
     {
-        if ($this->comments->removeElement($comment)) {
+        if ($this->comments->removeElement($comment))
+        {
             // set the owning side to null (unless already changed)
-            if ($comment->getConference() === $this) {
+            if ($comment->getConference() === $this)
+            {
                 $comment->setConference(null);
             }
         }
